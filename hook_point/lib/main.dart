@@ -33,11 +33,18 @@ class MyApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return MaterialApp(
-      title: 'Hook Point',
+      title: 'HookPoint',
       debugShowCheckedModeBanner: false,
-      theme: themeProvider.lightTheme,
-      darkTheme: themeProvider.darkTheme,
-      themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+
+      theme: ThemeData(
+          useMaterial3: false,
+          primarySwatch: Colors.blue,
+      ),
+
+      darkTheme: ThemeData.dark(),
+
+      themeMode: ThemeMode.light,
+
 
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

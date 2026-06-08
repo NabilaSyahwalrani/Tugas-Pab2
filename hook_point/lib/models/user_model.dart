@@ -6,6 +6,7 @@ class UserModel {
   final String fotoProfilBase64;
   final List<String> spotFavorit;
   final int jumlahPosting;
+  final String role; 
 
   UserModel({
     required this.id,
@@ -15,7 +16,10 @@ class UserModel {
     this.fotoProfilBase64 = '',
     this.spotFavorit = const [],
     this.jumlahPosting = 0,
+    this.role = 'user', 
   });
+
+  bool get isAdmin => role == 'admin'; 
 
   factory UserModel.fromMap(Map<String, dynamic> map, String id) {
     return UserModel(
@@ -26,6 +30,7 @@ class UserModel {
       fotoProfilBase64: map['fotoProfilBase64'] ?? '',
       spotFavorit: List<String>.from(map['spotFavorit'] ?? []),
       jumlahPosting: map['jumlahPosting'] ?? 0,
+      role: map['role'] ?? 'user', 
     );
   }
 
@@ -37,6 +42,7 @@ class UserModel {
       'fotoProfilBase64': fotoProfilBase64,
       'spotFavorit': spotFavorit,
       'jumlahPosting': jumlahPosting,
+      'role': role, 
     };
   }
 
@@ -48,6 +54,7 @@ class UserModel {
     String? fotoProfilBase64,
     List<String>? spotFavorit,
     int? jumlahPosting,
+    String? role,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -57,6 +64,7 @@ class UserModel {
       fotoProfilBase64: fotoProfilBase64 ?? this.fotoProfilBase64,
       spotFavorit: spotFavorit ?? this.spotFavorit,
       jumlahPosting: jumlahPosting ?? this.jumlahPosting,
+      role: role ?? this.role,
     );
   }
 }

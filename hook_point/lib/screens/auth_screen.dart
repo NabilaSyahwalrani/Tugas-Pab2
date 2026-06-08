@@ -1,5 +1,3 @@
-// lib/screens/auth_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:hook_point/services/auth_service.dart';
 
@@ -12,7 +10,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final AuthService _authService = AuthService();
-  bool _isLogin = true; // true = halaman login, false = register
+  bool _isLogin = true; 
   bool _isLoading = false;
   bool _showPassword = false;
 
@@ -29,7 +27,6 @@ class _AuthScreenState extends State<AuthScreen> {
     super.dispose();
   }
 
-  // Proses login
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -47,10 +44,8 @@ class _AuthScreenState extends State<AuthScreen> {
         SnackBar(content: Text(error), backgroundColor: Colors.red),
       );
     }
-    // Jika sukses, StreamBuilder di main.dart akan otomatis navigasi
   }
 
-  // Proses daftar
   Future<void> _daftar() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -80,7 +75,6 @@ class _AuthScreenState extends State<AuthScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header dengan gradien
             Container(
               width: double.infinity,
               height: size.height * 0.3,
@@ -100,7 +94,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   Icon(Icons.phishing, size: 64, color: Colors.white),
                   SizedBox(height: 12),
                   Text(
-                    'PancingKita 🎣',
+                    'HookPoint',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
@@ -116,7 +110,6 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
             ),
 
-            // Form
             Padding(
               padding: const EdgeInsets.all(24),
               child: Form(
@@ -126,7 +119,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   children: [
                     const SizedBox(height: 8),
 
-                    // Judul
                     Text(
                       _isLogin ? 'Masuk ke Akun' : 'Buat Akun Baru',
                       style: theme.textTheme.headlineSmall?.copyWith(
@@ -136,7 +128,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Field nama (hanya untuk register)
                     if (!_isLogin) ...[
                       TextFormField(
                         controller: _namaController,
@@ -154,7 +145,6 @@ class _AuthScreenState extends State<AuthScreen> {
                       const SizedBox(height: 16),
                     ],
 
-                    // Field email
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -174,7 +164,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    // Field password
                     TextFormField(
                       controller: _passwordController,
                       obscureText: !_showPassword,
@@ -201,8 +190,6 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     ),
                     const SizedBox(height: 24),
-
-                    // Tombol aksi
                     ElevatedButton(
                       onPressed: _isLoading
                           ? null
@@ -221,7 +208,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    // Switch login/register
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

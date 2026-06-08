@@ -14,15 +14,15 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const PostScreen(),
-    const FavoritScreen(),
-    const ProfilScreen(),
+  final List<Widget> _screens = const [
+    HomeScreen(),
+    PostScreen(),
+    FavoritScreen(),
+    ProfilScreen(),
   ];
 
   final List<String> _titles = [
-    'HookPoint ',
+    'HookPoint',
     'Tambah Spot',
     'Favorit',
     'Profil',
@@ -30,39 +30,64 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       appBar: AppBar(
+        elevation: 0,
         title: Text(_titles[_currentIndex]),
         actions: _currentIndex == 0
             ? [
                 IconButton(
                   icon: const Icon(Icons.info_outline),
                   onPressed: () {
-                    showAboutDialog(
+                    showDialog(
                       context: context,
-                      applicationName: 'HookPoint',
-                      applicationVersion: '1.0.0',
-                      applicationIcon: const Icon(Icons.phishing, size: 48),
-                      children: const [
-                        Text(
-                          'Aplikasi komunitas berbagi spot mancing terbaik di Indonesia. ',
+                      builder: (_) => AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                      ],
+                        title: const Row(
+                          children: [
+                            Icon(Icons.phishing, size: 32),
+                            SizedBox(width: 8),
+                            Text('HookPoint'),
+                          ],
+                        ),
+                        content: const Text(
+                          'Versi 1.0.0\n\nAplikasi komunitas berbagi spot mancing terbaik di Indonesia.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Tutup'),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
               ]
             : null,
       ),
+
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

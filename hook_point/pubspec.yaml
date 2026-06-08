@@ -45,6 +45,9 @@ dependencies:
   geocoding: ^4.0.0
   google_maps_flutter: ^2.9.0
   shared_preferences: ^2.3.3
+  timeago: ^3.7.1
+  provider: ^6.1.5+1
+  firebase_auth: ^6.5.2
 
 dev_dependencies:
   flutter_test:
